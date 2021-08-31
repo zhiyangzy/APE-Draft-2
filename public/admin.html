@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../script.js"> </script>
+        <link rel = "stylesheet" href="style.css">
+        <script>
+            document.write(Date());
+            </script>
+            <br>
+        <title>
+            Work Schedule
+        </title>
+        
+    </head>
+    <body>
+        <button id='btnViewAll'>View All</button> 
+        <p id ='displayTable'></p>
+        <button id=btnFind1> Find Product</button>
+         <input type ="text" id ="FindID" required>
+         <form action='/p/update' method="POST" id="updateform">
+             <fieldset>
+                 <h3>Update an Employee Work Schedule</h3>
+                 <label>Employee ID</label>
+                 <input type ="text" id ="updateID" required>
+                 <label>Work Start Timing</label>
+                 <input type ="text" id ="updatetype" name ="updatetype" required>
+                 <label>Work End Timing</label>
+                 <input type ="text" id ="updatetype" name ="updatetype" required>
+                 <label>Total Working Hours</label>
+                 <input type ="text" id ="updatetype" name ="updatetype" required>
+                 <br><br>
+                 <button type ='reset'>Reset</button>
+                 <button type ='submit'>Submit</button>           
+             
+             </fieldset>
+         </form>
+     
+        <script>
+        window.btnFind1.addEventListener('click', find1Product);
+            async function find1Product(){
+             console.log(document.getElementById("Findname").value);
+                let url = '/p/find/'+
+                      document.getElementById("Findname").value;
+                      const response = await fetch(url);
+                     if (!response.ok) throw response;
+                     displayProducts(await response.json());                
+            }
+     
+            window.btnViewAll.addEventListener('click', viewProduct);
+            async function viewProduct(){
+                const url ='p/all';
+                const response = await fetch(url);
+                if (!response.ok) throw response;
+                displayProducts(await response.json());
+            }
+            function displayProducts(items){
+                let AllProducts ='';
+                items.forEach((i)=>{
+                    let newItem = "<tr>" +
+                                  "<td>" + i.name + "</td>" + 
+                                  "<td>" + i.type + "</td>" +  
+                                  "</tr>";
+                     AllProducts += newItem;
+                 });
+                 window.displayTable.innerHTML  =
+                 "<Table border=2>" + AllProducts + "</Table>";
+            }
+        </script>
+     </body>
+     </html>

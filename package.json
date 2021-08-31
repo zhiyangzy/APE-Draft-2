@@ -1,0 +1,21 @@
+{
+  "name": "zhiyang1998",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.3",
+    "nodemon": "^2.0.12",
+    "path": "^0.12.7",
+    "save-dev": "0.0.1-security"
+  },
+  "devDependencies": {},
+  "description": ""
+}

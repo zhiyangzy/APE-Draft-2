@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel = "stylesheet" href="style.css">
+        <style>
+            body {
+              background-image: url('background.jpg');
+              background-repeat: no-repeat;
+              background-attachment: fixed;
+              background-size: cover;
+            }
+        </style>
+<body>
+    <button id='btnViewAll'>View All</button> 
+    <p id ='displayTable'></p>
+    <button id=btnFind1> Find Employee ID</button>
+     <input type ="text" id ="Findname" name ="Findname" required>
+ 
+    <script>
+    window.btnFind1.addEventListener('click', find1Product);
+        async function find1Product(){
+         console.log(document.getElementById("Findname").value);
+            let url = '/p/find/'+
+                  document.getElementById("Findname").value;
+                  const response = await fetch(url);
+                 if (!response.ok) throw response;
+                 displayProducts(await response.json());                
+        }
+ 
+        window.btnViewAll.addEventListener('click', viewProduct);
+        async function viewProduct(){
+            const url ='p/all';
+            const response = await fetch(url);
+            if (!response.ok) throw response;
+            displayProducts(await response.json());
+        }
+        function displayProducts(items){
+            let AllProducts ='';
+            items.forEach((i)=>{
+                let newItem = "<tr>" +
+                              "<td>" + i.name + "</td>" + 
+                              "<td>" + i.type + "</td>" +  
+                              "</tr>";
+                 AllProducts += newItem;
+             });
+             window.displayTable.innerHTML  =
+             "<Table border=2>" + AllProducts + "</Table>";
+        }
+    </script>
+ </body>
+ </html>
